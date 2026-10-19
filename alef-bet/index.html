@@ -1,0 +1,132 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}</style>
+<title>Alef-Bet Hebraico</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Alegreya:ital,wght@0,400;0,500;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+/* layout: guia de consulta em seções; letras em grade de fichas, sinais em tabelas, leitura guiada no fim */
+:root{--bg:#f7f8fb;--surface:#ffffff;--ink:#1a2238;--muted:#5c6680;--rule:#d9dee9;--accent:#1f4e8c;--band:#e9eef7;
+--f-he:"Frank Ruhl Libre","SBL Hebrew","Ezra SIL","Times New Roman",serif;--f-body:"Alegreya",Georgia,serif;--f-ui:"Alegreya Sans","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10141f;--surface:#171c2a;--ink:#e6e9f2;--muted:#9aa4bd;--rule:#2a3145;--accent:#8fb4ee;--band:#1d2538;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10141f;--surface:#171c2a;--ink:#e6e9f2;--muted:#9aa4bd;--rule:#2a3145;--accent:#8fb4ee;--band:#1d2538;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding-inline:20px;padding-block:36px 64px;display:flex;flex-direction:column;gap:40px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+h1{font-family:var(--f-he);font-weight:700;font-size:2.4rem;line-height:1.1;margin:0}
+h1 span{display:block;font-family:var(--f-ui);font-weight:500;font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.he-title{font-family:var(--f-he);font-size:2.6rem;font-weight:500;color:var(--accent);line-height:1}
+nav{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--f-ui);font-size:.95rem}
+a{color:var(--accent)}
+nav a{text-decoration:none}nav a:hover,nav a:focus-visible{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section{display:flex;flex-direction:column;gap:16px;scroll-margin-top:16px}
+h2{font-family:var(--f-ui);font-weight:700;font-size:1.25rem;margin:0;background:var(--band);padding:8px 14px}
+p{margin:0;max-width:68ch}
+.he{font-family:var(--f-he);direction:rtl;unicode-bidi:isolate}
+.tr{font-style:italic}
+.muted{color:var(--muted)}
+.letters{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:0 28px}
+.card{display:grid;grid-template-columns:5.2rem minmax(0,1fr);gap:4px 14px;padding-block:14px;border-bottom:1px solid var(--rule);align-items:start}
+.glyph{font-family:var(--f-he);font-size:3rem;line-height:1.15;color:var(--accent);text-align:center}
+.glyph small{display:block;font-family:var(--f-ui);font-size:.72rem;color:var(--muted);line-height:1.3;font-variant-numeric:tabular-nums}
+.card h3{margin:0;font-family:var(--f-ui);font-size:1.08rem;font-weight:700}
+.card h3 span{font-weight:400;color:var(--muted)}
+.card .snd{font-size:.97rem}
+.ex{font-size:.95rem;color:var(--muted)}
+.ex .he{font-size:1.35rem;color:var(--ink)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th{font-family:var(--f-ui);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;padding:6px 10px;border-bottom:1px solid var(--ink)}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:middle}
+td.sign{font-family:var(--f-he);font-size:2.2rem;line-height:1.3;color:var(--accent);text-align:center;width:4.5rem}
+td .he{font-size:1.4rem}
+tr.grp td{font-family:var(--f-ui);font-weight:700;font-size:.9rem;padding-top:16px;border-bottom:1px solid var(--ink)}
+.read{display:flex;flex-direction:row-reverse;flex-wrap:wrap;gap:14px 22px;justify-content:flex-start}
+.w{text-align:center;display:flex;flex-direction:column;gap:2px}
+.w .he{font-size:2.1rem;line-height:1.5}
+.w .syl{font-family:var(--f-ui);font-size:.95rem;color:var(--accent)}
+.w .gl{font-size:.9rem;color:var(--muted)}
+footer{font-family:var(--f-ui);font-size:.85rem;color:var(--muted);max-width:68ch}
+</style>
+<div class="wrap">
+<header><h1>Alef-Bet Hebraico<span>Letras, nikud e pronúncia sefardita · exemplos de Bereshit</span></h1><div class="he-title he" lang="he">אָלֶף־בֵּית</div></header>
+<nav aria-label="Seções"><a href="#letras">As 22 letras</a><a href="#vogais">Vogais (nikud)</a><a href="#sinais">Outros sinais</a><a href="#leitura">Leitura guiada de Gênesis 1:1</a></nav>
+
+<section id="como"><p>O hebraico se lê <strong>da direita para a esquerda</strong>. As 22 letras são todas consoantes; as vogais são os pontos e traços (<span class="tr">nikud</span>) escritos sob, sobre ou dentro das letras. A transliteração segue o mesmo padrão sefardita da página da Parashat Bereshit: <span class="tr">ḥ</span> = ח, <span class="tr">kh</span> = כ, <span class="tr">ʿ</span> = ע, <span class="tr">ts</span> = צ, <span class="tr">q</span> = ק, com acento na sílaba tônica.</p></section>
+
+<section id="letras"><h2>As 22 letras</h2>
+<p class="muted">Cinco letras têm uma forma final, usada só no fim da palavra. Sob cada letra está o seu valor numérico.</p>
+<div class="letters" id="L"></div></section>
+
+<section id="vogais"><h2>Vogais (nikud)</h2>
+<p class="muted">Os sinais aparecem aqui sob a letra מ (m). Na pronúncia sefardita há cinco sons vocálicos: a, e, i, o, u.</p>
+<div class="scroll"><table><thead><tr><th>Sinal</th><th>Nome</th><th>Som</th><th>Exemplo</th><th>Leitura</th></tr></thead><tbody id="V"></tbody></table></div></section>
+
+<section id="sinais"><h2>Outros sinais</h2>
+<div class="scroll"><table><thead><tr><th>Sinal</th><th>Nome</th><th>O que faz</th><th>Exemplo</th><th>Leitura</th></tr></thead><tbody id="S"></tbody></table></div></section>
+
+<section id="leitura"><h2>Leitura guiada de Gênesis 1:1</h2>
+<p class="muted">Palavra por palavra, da direita para a esquerda, com a divisão em sílabas.</p>
+<div class="read" id="R"></div></section>
+
+<footer>Pronúncia sefardita, que é a base do hebraico israelense moderno. Na tradição asquenazita alguns sons mudam (por exemplo, ת sem daguésh soa <em>s</em> e o qamáts soa <em>o</em>). Os exemplos vêm de Gênesis 1–5, com o texto do Códice de Leningrado.</footer>
+</div>
+<script>
+const L=[
+["א","","Álef","אָלֶף","1","Muda: não tem som próprio, só carrega a vogal. Entre duas vogais marca uma pausa leve (').","אֱלֹהִים","Elohím","Deus","1:1"],
+["בּ ב","","Bet / Vet","בֵּית","2","Com ponto (בּ) soa b; sem ponto (ב) soa v.","בָּרָא","bará","criou","1:1"],
+["ג","","Guímel","גִּימֶל","3","g sempre duro, como em “gato” (nunca como em “gelo”).","גַּן","gan","jardim","2:8"],
+["ד","","Dálet","דָּלֶת","4","d, como em “dado”.","דֶּשֶׁא","déshe","relva","1:11"],
+["ה","","He","הֵא","5","h aspirado, como no inglês “house”. No fim da palavra é mudo, salvo com ponto (הּ).","הָאָרֶץ","ha'árets","a terra","1:1"],
+["ו","","Vav","וָו","6","v. Também serve de vogal: וֹ = o, וּ = u.","וָבֹהוּ","vavóhu","e vazia","1:2"],
+["ז","","Záyin","זַיִן","7","z, como em “zero”.","זֶרַע","zéraʿ","semente","1:11"],
+["ח","","Ḥet","חֵית","8","ḥ: h forte e gutural, soprado no fundo da garganta. Não existe em português.","חֹשֶׁךְ","ḥóshekh","escuridão","1:2"],
+["ט","","Tet","טֵית","9","t, como em “tatu”.","טוֹב","tov","bom","1:4"],
+["י","","Yod","יוֹד","10","y, como o i de “iate”. Depois de vogal, apenas a prolonga.","יוֹם","yom","dia","1:5"],
+["כּ כ","ך","Kaf / Khaf","כַּף","20","Com ponto (כּ) soa k; sem ponto (כ, ך) soa kh, como o j espanhol de “Juan”.","כִּי","ki","que, porque","1:4"],
+["ל","","Lámed","לָמֶד","30","l, como em “lado” (nunca vira u no fim da sílaba).","לַיְלָה","láyla","noite","1:5"],
+["מ","ם","Mem","מֵם","40","m, sempre pronunciado, mesmo no fim da palavra.","מַיִם","máyim","águas","1:2"],
+["נ","ן","Nun","נוּן","50","n, sempre pronunciado, sem nasalizar a vogal anterior.","נֶפֶשׁ","néfesh","ser vivente","1:20"],
+["ס","","Sámekh","סָמֶךְ","60","s, como em “sapo” (nunca z).","סֵפֶר","séfer","livro","5:1"],
+["ע","","Áyin","עַיִן","70","ʿ: som gutural produzido na garganta. Na fala atual é quase mudo, como o álef.","עֶרֶב","ʿérev","tarde","1:5"],
+["פּ פ","ף","Pe / Fe","פֵּא","80","Com ponto (פּ) soa p; sem ponto (פ, ף) soa f.","פְּנֵי","pené","face de","1:2"],
+["צ","ץ","Tsádi","צָדִי","90","ts, como em “tsunami”.","צֶלֶם","tsélem","imagem","1:27"],
+["ק","","Qof","קוֹף","100","q: soa como k.","קָרָא","qará","chamou","1:5"],
+["ר","","Resh","רֵישׁ","200","r vibrante, como em “caro”.","רוּחַ","rúaḥ","espírito, vento","1:2"],
+["שׁ שׂ","","Shin / Sin","שִׁין","300","Ponto à direita (שׁ) soa sh, como o ch de “chuva”; ponto à esquerda (שׂ) soa s.","שָׁמַיִם","shamáyim","céus","1:1"],
+["תּ ת","","Tav","תָּו","400","t, com ou sem ponto.","תֹהוּ","tóhu","sem forma","1:2"]];
+document.getElementById('L').innerHTML=L.map(([g,f,n,hn,num,s,ex,tr,pt,ref])=>
+'<div class="card"><div class="glyph he" lang="he">'+g+'<small>'+num+(f?' · final <span class="he" lang="he" style="font-size:1.3rem;color:var(--ink)">'+f+'</span>':'')+'</small></div><div><h3>'+n+' <span class="he" lang="he">'+hn+'</span></h3><div class="snd">'+s+'</div><div class="ex"><span class="he" lang="he">'+ex+'</span> <span class="tr">'+tr+'</span> · '+pt+' <span>('+ref+')</span></div></div></div>').join('');
+const row=r=>r.length===1?'<tr class="grp"><td colspan="5">'+r[0]+'</td></tr>':'<tr><td class="sign he" lang="he">'+r[0]+'</td><td><strong>'+r[1]+'</strong></td><td>'+r[2]+'</td><td><span class="he" lang="he">'+r[3]+'</span></td><td><span class="tr">'+r[4]+'</span> <span class="muted">· '+r[5]+'</span></td></tr>';
+const V=[
+["Som de a"],
+["מַ","Patáḥ","a, como em “casa”","הַשָּׁמַיִם","hashamáyim","os céus (1:1)"],
+["מָ","Qamáts","a. Em algumas sílabas fechadas e átonas soa o (qamáts qatán)","בָּרָא · כָּל","bará · kol","criou (1:1) · todo (1:21)"],
+["Som de e"],
+["מֶ","Segól","e","אֶרֶץ","érets","terra (1:10)"],
+["מֵ","Tseré","e (às vezes escrito com yod: מֵי)","אֵת · פְּנֵי","et · pené","partícula do objeto (1:1) · face de (1:2)"],
+["Som de i"],
+["מִ","Ḥiríq","i (às vezes escrito com yod: מִי)","כִּי · אֱלֹהִים","ki · Elohím","que (1:4) · Deus (1:1)"],
+["Som de o"],
+["מֹ","Ḥolám","o: ponto acima, à esquerda da letra","תֹהוּ","tóhu","sem forma (1:2)"],
+["מוֹ","Ḥolám com vav","o: o vav não soa v, só carrega o ponto","אוֹר","or","luz (1:3)"],
+["Som de u"],
+["מֻ","Qubúts","u","וַיְכֻלּוּ","vayekhullú","foram concluídos (2:1)"],
+["מוּ","Shurúq","u: vav com ponto no meio","רוּחַ","rúaḥ","espírito (1:2)"],
+["Vogais brevíssimas"],
+["מְ","Shevá","No início da sílaba é um e muito breve (shevá naʿ); no fim da sílaba é mudo (shevá naḥ)","בְּרֵאשִׁית · וַיַּבְדֵּל","bereshít · vayyavdél","no princípio (1:1) · e separou (1:4)"],
+["אֲ","Ḥatáf-patáḥ","a breve, sob letras guturais","אֲשֶׁר","ashér","que (1:7)"],
+["אֱ","Ḥatáf-segól","e breve, sob letras guturais","אֱלֹהִים","Elohím","Deus (1:1)"],
+["אֳ","Ḥatáf-qamáts","o breve, sob letras guturais","לֻקֳחָה","luqoḥá","foi tomada (2:23)"]];
+document.getElementById('V').innerHTML=V.map(row).join('');
+const S=[
+["בּ","Daguésh","Ponto dentro da letra. Em ב, כ, פ muda o som (b/v, k/kh, p/f). Nas outras letras, dobra a consoante","הַמַּיִם","hammáyim","as águas (1:2)"],
+["הּ","Mappíq","Ponto no he final: o h é pronunciado","לְמִינָהּ","lemináh","segundo a sua espécie (1:24)"],
+["שׁ שׂ","Ponto do shin / sin","À direita, sh; à esquerda, s","שֵׁנִי · עֵשֶׂב","shení · ʿésev","segundo (1:8) · erva (1:11)"],
+["חַ","Patáḥ furtivo","Sob ח ou ע no fim da palavra, o a é lido antes da consoante","רוּחַ · רָקִיעַ","rúaḥ · raqíaʿ","espírito (1:2) · firmamento (1:6)"],
+["־","Maqqéf","Hífen alto que liga palavras lidas em conjunto","עַל־פְּנֵי","ʿal-pené","sobre a face de (1:2)"],
+["׃","Sof pasúq","Marca o fim do versículo","הָאָרֶץ׃","ha'árets","a terra (1:1)"]];
+document.getElementById('S').innerHTML=S.map(row).join('');
+const R=[["בְּרֵאשִׁית","be·re·SHÍT","no princípio"],["בָּרָא","ba·RÁ","criou"],["אֱלֹהִים","E·lo·HÍM","Deus"],["אֵת","et","(marca o objeto)"],["הַשָּׁמַיִם","ha·sha·MÁ·yim","os céus"],["וְאֵת","ve·'ÉT","e (objeto)"],["הָאָרֶץ","ha·'Á·rets","a terra"]];
+document.getElementById('R').innerHTML=R.map(([h,s,g])=>'<div class="w"><span class="he" lang="he">'+h+'</span><span class="syl">'+s+'</span><span class="gl">'+g+'</span></div>').join('');
+</script>
