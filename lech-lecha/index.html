@@ -2,6 +2,14 @@
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>body{margin:0}.home{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font-family:var(--f-ui);font-size:.95rem;font-weight:500;color:var(--accent);text-decoration:none;border:1px solid var(--accent);border-radius:999px;padding:5px 14px;margin-bottom:14px}
 .home:hover,.home:focus-visible{background:var(--accent);color:var(--bg)}
+.togs{display:inline-flex;flex-wrap:wrap;gap:6px}
+.bar label.tog{position:relative;gap:0;padding:5px 14px;border-radius:999px;border:1px solid var(--accent);color:var(--accent);background:transparent;font-weight:500;user-select:none;transition:background .15s,color .15s}
+.bar label.tog input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.bar label.tog::before{content:"\2715";display:inline-block;width:1.1em;font-size:.85em;opacity:.7}
+.bar label.tog.on{background:var(--accent);color:var(--bg)}
+.bar label.tog.on::before{content:"\2713";opacity:1}
+.bar label.tog:hover{box-shadow:0 0 0 2px var(--band)}
+.bar label.tog:focus-within{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 <title>Parashat Lech-Lecha</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Alegreya:ital,wght@0,400;0,500;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap">
@@ -49,11 +57,13 @@ footer{margin-top:36px;font-family:var(--f-ui);font-size:.85rem;color:var(--mute
 <a class="home" href="../index.html">&larr; Página inicial</a>
 
 <header><h1>Parashat Lech-Lecha<span>Genesis 12:1 – 17:27 · 126 verses</span></h1><div class="he-title" lang="he" dir="rtl">פָּרָשַׁת לֶךְ־לְךָ</div></header>
-<div class="bar"><span>Columns:</span>
-<label><input type="checkbox" id="c-pt" checked> Português</label>
-<label><input type="checkbox" id="c-en" checked> English</label>
-<label><input type="checkbox" id="c-he" checked> Hebrew</label>
-<label><input type="checkbox" id="c-tr" checked> Transliteration</label>
+<div class="bar"><span>Colunas:</span>
+<span class="togs" role="group" aria-label="Mostrar ou ocultar colunas">
+<label class="tog on"><input type="checkbox" id="c-pt" checked>Português</label>
+<label class="tog on"><input type="checkbox" id="c-en" checked>Inglês</label>
+<label class="tog on"><input type="checkbox" id="c-he" checked>Hebraico</label>
+<label class="tog on"><input type="checkbox" id="c-tr" checked>Transliteração</label>
+</span>
 <button type="button" id="all" class="allb">▶ Play all</button>
 <label><input type="checkbox" id="c-slow"> Slow audio</label>
 <nav id="nav" aria-label="Aliyot"></nav><span id="note" hidden>The audio could not be played. Check that the device is not muted and try again.</span></div>
@@ -74,8 +84,10 @@ D.forEach(([c,v,en,he,tr],i)=>{const k=A.findIndex(a=>a[0]===c&&a[1]===v);
  h+='<div class="row"><div class="ref"><span>'+c+':'+v+'</span><button class="pl" type="button" data-i="'+i+'" aria-label="Play verse '+c+':'+v+' in Hebrew">▶</button></div><div class="pt">'+esc(P[i])+'</div><div class="en">'+esc(en)+'</div><div class="he" lang="he">'+he+'</div><div class="tr">'+esc(tr)+'</div></div>';});
 t.innerHTML=h;
 const root=document.getElementById('root');
-function upd(){let n=0;['pt','en','he','tr'].forEach(k=>{const on=document.getElementById('c-'+k).checked;root.classList.toggle('hide-'+k,!on);n+=on});root.style.setProperty('--n',Math.max(n,1));}
-['pt','en','he','tr'].forEach(k=>document.getElementById('c-'+k).addEventListener('change',upd));
+function upd(){let n=0;const s={};['pt','en','he','tr'].forEach(k=>{const el=document.getElementById('c-'+k),on=el.checked;root.classList.toggle('hide-'+k,!on);el.closest('label').classList.toggle('on',on);s[k]=on;n+=on});root.style.setProperty('--n',Math.max(n,1));try{localStorage.setItem('parashat-cols',JSON.stringify(s))}catch(e){}}
+try{const s=JSON.parse(localStorage.getItem('parashat-cols')||'null');if(s)['pt','en','he','tr'].forEach(k=>{if(k in s)document.getElementById('c-'+k).checked=!!s[k]})}catch(e){}
+['pt','en','he','tr'].forEach(k=>document.getElementById('c-'+k).addEventListener('change',e=>{if(!['pt','en','he','tr'].some(j=>document.getElementById('c-'+j).checked))e.target.checked=true}));
+['pt','en','he','tr'].forEach(k=>document.getElementById('c-'+k).addEventListener('change',upd));upd();
 
 const T=[[0.0, 6.06], [6.46, 10.57], [10.97, 16.125], [16.525, 23.491], [23.891, 34.421], [34.821, 39.79], [40.19, 46.82], [47.22, 55.161], [55.561, 58.057], [58.457, 63.403], [63.803, 70.154], [70.554, 75.65], [76.05, 80.451], [80.851, 85.46], [85.86, 90.933], [91.333, 97.661], [98.061, 103.076], [103.476, 108.503], [108.903, 113.78], [114.18, 119.009], [119.409, 123.833], [124.233, 127.193], [127.593, 133.712], [134.112, 138.802], [139.202, 142.685], [143.085, 148.623], [149.023, 154.851], [155.251, 161.788], [162.188, 168.155], [168.555, 177.483], [177.883, 182.91], [183.31, 188.071], [188.471, 191.478], [191.878, 199.865], [200.265, 204.689], [205.089, 211.161], [211.561, 215.415], [215.815, 221.62], [222.02, 228.696], [229.096, 236.863], [237.263, 240.27], [240.67, 244.954], [245.354, 254.421], [254.821, 258.362], [258.762, 265.81], [266.21, 274.348], [274.748, 282.155], [282.555, 289.243], [289.643, 293.857], [294.257, 298.855], [299.255, 307.057], [307.457, 313.97], [314.37, 319.745], [320.145, 325.498], [325.898, 333.537], [333.937, 338.418], [338.818, 343.242], [343.642, 348.402], [348.802, 352.517], [352.917, 358.025], [358.425, 364.242], [364.642, 371.503], [371.903, 378.811], [379.211, 385.191], [385.591, 389.724], [390.124, 395.406], [395.806, 403.202], [403.602, 406.295], [406.695, 412.384], [412.784, 415.501], [415.901, 421.451], [421.851, 428.004], [428.404, 431.457], [431.857, 437.511], [437.911, 444.517], [444.917, 449.77], [450.17, 453.665], [454.065, 458.001], [458.401, 464.217], [464.617, 472.477], [472.877, 475.443], [475.843, 478.583], [478.983, 482.768], [483.168, 487.44], [487.84, 495.41], [495.81, 504.309], [504.709, 508.865], [509.265, 517.404], [517.804, 524.537], [524.937, 529.338], [529.738, 536.274], [536.674, 540.935], [541.335, 545.63], [546.03, 552.416], [552.816, 557.518], [557.918, 563.026], [563.426, 567.71], [568.11, 572.917], [573.317, 577.752], [578.152, 585.896], [586.296, 590.464], [590.864, 594.417], [594.817, 597.858], [598.258, 603.483], [603.883, 608.689], [609.089, 616.891], [617.291, 624.78], [625.18, 630.369], [630.769, 636.249], [636.649, 640.608], [641.008, 648.682], [649.082, 654.411], [654.811, 660.547], [660.947, 665.846], [666.246, 672.249], [672.649, 679.87], [680.27, 683.846], [684.246, 692.454], [692.854, 701.445], [701.845, 706.861], [707.261, 710.407], [710.807, 721.663], [722.063, 725.882], [726.282, 730.392], [730.792, 733.892], [734.292, 739.006]];
 const btns=[...t.querySelectorAll('.pl')],all=document.getElementById('all'),note=document.getElementById('note');

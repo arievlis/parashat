@@ -2,6 +2,14 @@
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>body{margin:0}.home{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font-family:var(--f-ui);font-size:.95rem;font-weight:500;color:var(--accent);text-decoration:none;border:1px solid var(--accent);border-radius:999px;padding:5px 14px;margin-bottom:14px}
 .home:hover,.home:focus-visible{background:var(--accent);color:var(--bg)}
+.togs{display:inline-flex;flex-wrap:wrap;gap:6px}
+.bar label.tog{position:relative;gap:0;padding:5px 14px;border-radius:999px;border:1px solid var(--accent);color:var(--accent);background:transparent;font-weight:500;user-select:none;transition:background .15s,color .15s}
+.bar label.tog input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.bar label.tog::before{content:"\2715";display:inline-block;width:1.1em;font-size:.85em;opacity:.7}
+.bar label.tog.on{background:var(--accent);color:var(--bg)}
+.bar label.tog.on::before{content:"\2713";opacity:1}
+.bar label.tog:hover{box-shadow:0 0 0 2px var(--band)}
+.bar label.tog:focus-within{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 <title>Parashat Noach</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Alegreya:ital,wght@0,400;0,500;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap">
@@ -49,11 +57,13 @@ footer{margin-top:36px;font-family:var(--f-ui);font-size:.85rem;color:var(--mute
 <a class="home" href="../index.html">&larr; Página inicial</a>
 
 <header><h1>Parashat Noach<span>Genesis 6:9 – 11:32 · 153 verses</span></h1><div class="he-title" lang="he" dir="rtl">פָּרָשַׁת נֹחַ</div></header>
-<div class="bar"><span>Columns:</span>
-<label><input type="checkbox" id="c-pt" checked> Português</label>
-<label><input type="checkbox" id="c-en" checked> English</label>
-<label><input type="checkbox" id="c-he" checked> Hebrew</label>
-<label><input type="checkbox" id="c-tr" checked> Transliteration</label>
+<div class="bar"><span>Colunas:</span>
+<span class="togs" role="group" aria-label="Mostrar ou ocultar colunas">
+<label class="tog on"><input type="checkbox" id="c-pt" checked>Português</label>
+<label class="tog on"><input type="checkbox" id="c-en" checked>Inglês</label>
+<label class="tog on"><input type="checkbox" id="c-he" checked>Hebraico</label>
+<label class="tog on"><input type="checkbox" id="c-tr" checked>Transliteração</label>
+</span>
 <button type="button" id="all" class="allb">▶ Play all</button>
 <label><input type="checkbox" id="c-slow"> Slow audio</label>
 <nav id="nav" aria-label="Aliyot"></nav><span id="note" hidden>The audio could not be played. Check that the device is not muted and try again.</span></div>
@@ -74,8 +84,10 @@ D.forEach(([c,v,en,he,tr],i)=>{const k=A.findIndex(a=>a[0]===c&&a[1]===v);
  h+='<div class="row"><div class="ref"><span>'+c+':'+v+'</span><button class="pl" type="button" data-i="'+i+'" aria-label="Play verse '+c+':'+v+' in Hebrew">▶</button></div><div class="pt">'+esc(P[i])+'</div><div class="en">'+esc(en)+'</div><div class="he" lang="he">'+he+'</div><div class="tr">'+esc(tr)+'</div></div>';});
 t.innerHTML=h;
 const root=document.getElementById('root');
-function upd(){let n=0;['pt','en','he','tr'].forEach(k=>{const on=document.getElementById('c-'+k).checked;root.classList.toggle('hide-'+k,!on);n+=on});root.style.setProperty('--n',Math.max(n,1));}
-['pt','en','he','tr'].forEach(k=>document.getElementById('c-'+k).addEventListener('change',upd));
+function upd(){let n=0;const s={};['pt','en','he','tr'].forEach(k=>{const el=document.getElementById('c-'+k),on=el.checked;root.classList.toggle('hide-'+k,!on);el.closest('label').classList.toggle('on',on);s[k]=on;n+=on});root.style.setProperty('--n',Math.max(n,1));try{localStorage.setItem('parashat-cols',JSON.stringify(s))}catch(e){}}
+try{const s=JSON.parse(localStorage.getItem('parashat-cols')||'null');if(s)['pt','en','he','tr'].forEach(k=>{if(k in s)document.getElementById('c-'+k).checked=!!s[k]})}catch(e){}
+['pt','en','he','tr'].forEach(k=>document.getElementById('c-'+k).addEventListener('change',e=>{if(!['pt','en','he','tr'].some(j=>document.getElementById('c-'+j).checked))e.target.checked=true}));
+['pt','en','he','tr'].forEach(k=>document.getElementById('c-'+k).addEventListener('change',upd));upd();
 
 const T=[[0.0, 5.05], [5.45, 8.817], [9.217, 13.083], [13.483, 18.58], [18.98, 25.702], [26.102, 31.954], [32.354, 38.31], [38.71, 45.908], [46.308, 54.226], [54.626, 60.233], [60.633, 66.473], [66.873, 73.549], [73.949, 79.766], [80.166, 83.8], [84.2, 90.005], [90.405, 97.359], [97.759, 102.612], [103.012, 110.64], [111.04, 113.803], [114.203, 117.57], [117.97, 122.95], [123.35, 129.004], [129.404, 134.617], [135.017, 138.373], [138.773, 147.631], [148.031, 151.619], [152.019, 158.868], [159.268, 167.813], [168.213, 172.95], [173.35, 179.167], [179.567, 185.244], [185.644, 190.59], [190.99, 197.097], [197.497, 201.328], [201.728, 208.996], [209.396, 213.401], [213.801, 223.089], [223.489, 226.485], [226.885, 234.698], [235.098, 239.731], [240.131, 245.564], [245.964, 250.922], [251.322, 257.347], [257.747, 261.973], [262.373, 266.704], [267.104, 271.167], [271.567, 280.414], [280.814, 284.936], [285.336, 291.442], [291.842, 296.835], [297.235, 306.697], [307.097, 310.986], [311.386, 313.453], [313.853, 317.696], [318.096, 327.233], [327.633, 330.849], [331.249, 336.845], [337.245, 344.036], [344.436, 356.0], [356.4, 362.147], [362.547, 367.516], [367.916, 376.147], [376.547, 381.11], [381.51, 383.983], [384.383, 391.755], [392.155, 396.904], [397.304, 400.415], [400.815, 403.788], [404.188, 407.763], [408.163, 415.594], [415.994, 422.623], [423.023, 429.676], [430.076, 433.826], [434.226, 437.593], [437.993, 445.829], [446.229, 453.311], [453.711, 459.296], [459.696, 464.607], [465.007, 468.246], [468.646, 471.305], [471.705, 475.095], [475.495, 479.825], [480.225, 488.91], [489.31, 492.955], [493.355, 496.467], [496.867, 500.466], [500.866, 504.999], [505.399, 509.068], [509.468, 513.334], [513.734, 518.796], [519.196, 524.107], [524.507, 527.456], [527.856, 531.002], [531.402, 535.941], [536.341, 539.302], [539.702, 544.903], [545.303, 548.635], [549.035, 554.318], [554.718, 559.083], [559.483, 564.232], [564.632, 568.173], [568.573, 573.019], [573.419, 578.319], [578.719, 581.575], [581.975, 584.9], [585.3, 587.634], [588.034, 592.922], [593.322, 599.963], [600.363, 604.101], [604.501, 608.414], [608.814, 612.065], [612.465, 615.123], [615.523, 618.867], [619.267, 625.362], [625.762, 630.22], [630.62, 633.163], [633.563, 635.978], [636.378, 639.919], [640.319, 643.396], [643.796, 647.569], [647.969, 653.983], [654.383, 657.599], [657.999, 662.469], [662.869, 670.369], [670.769, 677.363], [677.763, 681.687], [682.087, 689.552], [689.952, 694.028], [694.428, 699.211], [699.611, 706.182], [706.582, 711.389], [711.789, 716.409], [716.809, 720.652], [721.052, 726.892], [727.292, 730.079], [730.479, 736.005], [736.405, 739.818], [740.218, 745.861], [746.261, 749.128], [749.528, 754.706], [755.106, 758.45], [758.85, 764.075], [764.475, 767.47], [767.87, 772.421], [772.821, 776.118], [776.518, 781.998], [782.398, 786.288], [786.688, 791.958], [792.358, 796.619], [797.019, 804.31], [804.71, 806.951], [807.351, 817.835], [818.235, 822.635]];
 const btns=[...t.querySelectorAll('.pl')],all=document.getElementById('all'),note=document.getElementById('note');
