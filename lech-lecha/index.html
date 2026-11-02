@@ -10,6 +10,7 @@
 .bar label.tog.on::before{content:"\2713";opacity:1}
 .bar label.tog:hover{box-shadow:0 0 0 2px var(--band)}
 .bar label.tog:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.reading{display:block;margin-top:6px;font-family:var(--f-ui);font-size:.95rem;font-weight:500;letter-spacing:0;text-transform:none;color:var(--accent)}
 </style>
 <title>Parashat Lech-Lecha</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Alegreya:ital,wght@0,400;0,500;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap">
@@ -56,7 +57,7 @@ footer{margin-top:36px;font-family:var(--f-ui);font-size:.85rem;color:var(--mute
 <div class="wrap" id="root">
 <a class="home" href="../index.html">&larr; Página inicial</a>
 
-<header><h1>Parashat Lech-Lecha<span>Genesis 12:1 – 17:27 · 126 verses</span></h1><div class="he-title" lang="he" dir="rtl">פָּרָשַׁת לֶךְ־לְךָ</div></header>
+<header><h1>Parashat Lech-Lecha<span>Genesis 12:1 – 17:27 · 126 verses</span><span class="reading">Leitura: Shabat, 24 de outubro de 2026 · 13 de Cheshvan de 5787</span></h1><div class="he-title" lang="he" dir="rtl">פָּרָשַׁת לֶךְ־לְךָ</div></header>
 <div class="bar"><span>Colunas:</span>
 <span class="togs" role="group" aria-label="Mostrar ou ocultar colunas">
 <label class="tog on"><input type="checkbox" id="c-pt" checked>Português</label>
@@ -80,7 +81,7 @@ const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
 D.forEach(([c,v,en,he,tr],i)=>{const k=A.findIndex(a=>a[0]===c&&a[1]===v);
  if(k>=0){const n=A[k+1],e=n?(()=>{const p=D[D.findIndex(x=>x[0]===n[0]&&x[1]===n[1])-1];return p[0]+':'+p[1]})():'17:27';
   h+='<div class="aliyah" id="a'+(k+1)+'"><span>'+(k+1)+' · '+A[k][2]+' <small>'+c+':'+v+' – '+e+'</small></span><b lang="he" dir="rtl">'+A[k][3]+'</b></div>';
-  nav.insertAdjacentHTML('beforeend','<a href="#a'+(k+1)+'">'+A[k][2]+'</a>');}
+  nav.insertAdjacentHTML('beforeend','<a href="#a'+(k+1)+'">'+(k+1)+' · '+A[k][2]+'</a>');}
  h+='<div class="row"><div class="ref"><span>'+c+':'+v+'</span><button class="pl" type="button" data-i="'+i+'" aria-label="Play verse '+c+':'+v+' in Hebrew">▶</button></div><div class="pt">'+esc(P[i])+'</div><div class="en">'+esc(en)+'</div><div class="he" lang="he">'+he+'</div><div class="tr">'+esc(tr)+'</div></div>';});
 t.innerHTML=h;
 const root=document.getElementById('root');
