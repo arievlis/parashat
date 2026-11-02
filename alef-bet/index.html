@@ -3,6 +3,11 @@
 <style>body{margin:0}.home{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font-family:var(--f-ui);font-size:.95rem;font-weight:500;color:var(--accent);text-decoration:none;border:1px solid var(--accent);border-radius:999px;padding:5px 14px;margin-bottom:14px}
 .home:hover,.home:focus-visible{background:var(--accent);color:var(--bg)}
 .wrap>.home{margin-bottom:-26px}
+.pl{font:inherit;font-size:.8rem;width:2rem;height:2rem;flex:none;border-radius:50%;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;line-height:1;padding:0;vertical-align:middle;margin-inline-start:8px}
+.pl:hover,.pl.on{background:var(--accent);color:var(--bg)}
+.w .pl{margin:4px auto 0}
+.plline{font:inherit;font-family:var(--f-ui);font-weight:500;align-self:flex-start;padding:6px 16px;border-radius:999px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.plline:hover,.plline.on{background:var(--accent);color:var(--bg)}
 </style>
 <title>Alef-Bet Hebraico</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Alegreya:ital,wght@0,400;0,500;1,400&family=Alegreya+Sans:wght@400;500;700&display=swap">
@@ -58,7 +63,7 @@ footer{font-family:var(--f-ui);font-size:.85rem;color:var(--muted);max-width:68c
 <header><h1>Alef-Bet Hebraico<span>Letras, nikud e pronúncia sefardita · exemplos de Bereshit</span></h1><div class="he-title he" lang="he">אָלֶף־בֵּית</div></header>
 <nav aria-label="Seções"><a href="#letras">As 22 letras</a><a href="#vogais">Vogais (nikud)</a><a href="#sinais">Outros sinais</a><a href="#leitura">Leitura guiada de Gênesis 1:1</a></nav>
 
-<section id="como"><p>O hebraico se lê <strong>da direita para a esquerda</strong>. As 22 letras são todas consoantes; as vogais são os pontos e traços (<span class="tr">nikud</span>) escritos sob, sobre ou dentro das letras. A transliteração segue o mesmo padrão sefardita da página da Parashat Bereshit: <span class="tr">ḥ</span> = ח, <span class="tr">kh</span> = כ, <span class="tr">ʿ</span> = ע, <span class="tr">ts</span> = צ, <span class="tr">q</span> = ק, com acento na sílaba tônica.</p></section>
+<section id="como"><p>Toque em ▶ para ouvir cada letra, vogal, sinal e palavra (voz sintética, pronúncia sefardita). O hebraico se lê <strong>da direita para a esquerda</strong>. As 22 letras são todas consoantes; as vogais são os pontos e traços (<span class="tr">nikud</span>) escritos sob, sobre ou dentro das letras. A transliteração segue o mesmo padrão sefardita da página da Parashat Bereshit: <span class="tr">ḥ</span> = ח, <span class="tr">kh</span> = כ, <span class="tr">ʿ</span> = ע, <span class="tr">ts</span> = צ, <span class="tr">q</span> = ק, com acento na sílaba tônica.</p></section>
 
 <section id="letras"><h2>As 22 letras</h2>
 <p class="muted">Cinco letras têm uma forma final, usada só no fim da palavra. Sob cada letra está o seu valor numérico.</p>
@@ -135,4 +140,19 @@ const S=[
 document.getElementById('S').innerHTML=S.map(row).join('');
 const R=[["בְּרֵאשִׁית","be·re·SHÍT","no princípio"],["בָּרָא","ba·RÁ","criou"],["אֱלֹהִים","E·lo·HÍM","Deus"],["אֵת","et","(marca o objeto)"],["הַשָּׁמַיִם","ha·sha·MÁ·yim","os céus"],["וְאֵת","ve·'ÉT","e (objeto)"],["הָאָרֶץ","ha·'Á·rets","a terra"]];
 document.getElementById('R').innerHTML=R.map(([h,s,g])=>'<div class="w"><span class="he" lang="he">'+h+'</span><span class="syl">'+s+'</span><span class="gl">'+g+'</span></div>').join('');
+
+const T={"L0": [0.0, 1.615], "L1": [2.015, 3.676], "L2": [4.076, 5.783], "L3": [6.183, 8.018], "L4": [8.418, 9.847], "L5": [10.247, 11.664], "L6": [12.064, 13.853], "L7": [14.253, 15.635], "L8": [16.035, 17.197], "L9": [17.597, 18.863], "L10": [19.263, 21.064], "L11": [21.464, 23.322], "L12": [23.722, 25.174], "L13": [25.574, 27.154], "L14": [27.554, 29.4], "L15": [29.8, 31.473], "L16": [31.873, 33.639], "L17": [34.039, 35.781], "L18": [36.181, 37.644], "L19": [38.044, 39.485], "L20": [39.885, 42.057], "L21": [42.457, 43.769], "V0": [44.169, 45.83], "V1": [46.23, 48.007], "V2": [48.407, 49.79], "V3": [50.19, 52.048], "V4": [52.448, 54.19], "V5": [54.59, 55.961], "V6": [56.361, 57.453], "V7": [57.853, 59.538], "V8": [59.938, 61.273], "V9": [61.673, 64.159], "V10": [64.559, 65.79], "V11": [66.19, 67.503], "V12": [67.903, 69.332], "S0": [69.732, 70.475], "S1": [70.875, 71.699], "S2": [72.099, 73.237], "S3": [73.637, 74.96], "S4": [75.36, 76.312], "S5": [76.712, 77.374], "R0": [77.774, 78.459], "R1": [78.859, 79.323], "R2": [79.723, 80.362], "R3": [80.762, 80.971], "R4": [81.371, 82.288], "R5": [82.688, 83.199], "R6": [83.599, 84.261], "RL": [84.661, 87.401]};
+const au=new Audio('audio.mp3');au.preload='metadata';let cur=null,end=0;
+const mk=(k,lab)=>{const b=document.createElement('button');b.type='button';b.className='pl';b.dataset.k=k;b.setAttribute('aria-label',lab);b.textContent='▶';return b};
+function stop(){au.pause();if(cur){cur.classList.remove('on');cur.textContent=cur.classList.contains('plline')?cur.dataset.lab:'▶';cur=null}}
+function play(b){const same=cur===b;stop();if(same)return;const t=T[b.dataset.k];cur=b;end=t[1];b.classList.add('on');b.textContent=b.classList.contains('plline')?'■ Parar':'■';
+ const go=()=>{au.currentTime=t[0];const p=au.play();if(p&&p.catch)p.catch(()=>stop())};
+ if(au.readyState>=1)go();else{au.addEventListener('loadedmetadata',go,{once:true});au.load()}}
+au.addEventListener('timeupdate',()=>{if(cur&&au.currentTime>=end)stop()});au.addEventListener('ended',stop);
+document.querySelectorAll('#L .card').forEach((c,i)=>{const h=c.querySelector('h3');h.appendChild(mk('L'+i,'Ouvir a letra e o exemplo'))});
+[...document.querySelectorAll('#V tr')].filter(r=>!r.classList.contains('grp')).forEach((r,i)=>r.lastElementChild.appendChild(mk('V'+i,'Ouvir a vogal e o exemplo')));
+document.querySelectorAll('#S tr').forEach((r,i)=>r.lastElementChild.appendChild(mk('S'+i,'Ouvir o exemplo')));
+document.querySelectorAll('#R .w').forEach((w,i)=>w.appendChild(mk('R'+i,'Ouvir a palavra')));
+{const b=mk('RL','Ouvir o versículo inteiro');b.className='plline';b.dataset.lab='▶ Ouvir o versículo inteiro';b.textContent=b.dataset.lab;document.getElementById('R').before(b)}
+document.addEventListener('click',e=>{const b=e.target.closest('.pl,.plline');if(b)play(b)});
 </script>
